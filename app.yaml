@@ -1,20 +1,15 @@
 kind: wasmer.io/App.v0
-name: laravel4  
- # اختر اسماً فريداً لتطبيقك 
-package: .                 # يشير إلى المجلد الحالي الذي يحتوي على wasmer.toml 
- # إعداد قاعدة البيانات 
+name: laravel4 
+package: .                
 capabilities: 
    database:  
       engine: mysql  
-              # محرك قاعدة البيانات  
-              # تحديد المنطقة (ضروري لقواعد البيانات) 
 locality:  
    regions:   
      - fr-roub1         
-                     # يمكنك اختيار مناطق أخرى مثل us-ashburn أو de-falkenstein  
-                     # ربط متغيرات لارافيل بمتغيرات Wasmer
+                  
 env: 
    DB_CONNECTION: mysql 
    DB_DATABASE: ${DB_NAME} 
-                           # Wasmer يمررها باسم DB_NAME ولارافيل يتوقعها DB_DATABASE   
-APP_DEBUG: "true"
+   APP_DEBUG: "true"
+   APP_KEY: ""
