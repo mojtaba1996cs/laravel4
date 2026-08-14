@@ -12,4 +12,15 @@ env:
    DB_CONNECTION: mysql 
    DB_DATABASE: ${DB_NAME} 
    APP_DEBUG: "true"
-   APP_KEY: "base64:STyEX+Yi0BF3oKVufCv0nkum7oo2FJydWDF1fohdwBY="
+   APP_KEY: "base64:STyEX+Yi0BF3oKVufCv0nkum7oo2FJydWDF1fohdwBY=" 
+jobs:
+  - name: run-migrations
+    trigger: post-deployment
+    action:
+      execute:
+        command: run  # يجب أن يطابق اسم الـ command في ملف wasmer.toml
+        cli_args:
+          - "artisan"
+          - "migrate"
+          - "--force"
+
