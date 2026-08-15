@@ -1,26 +1,32 @@
 kind: wasmer.io/App.v0
-name: laravel4 
-package: .                
-capabilities: 
-   database:  
-      engine: mysql  
-locality:  
-   regions:   
-     - fr-roub1         
-                  
-env: 
-   DB_CONNECTION: mysql 
-   DB_DATABASE: ${DB_NAME} 
-   APP_DEBUG: "true"
-   APP_KEY: "base64:STyEX+Yi0BF3oKVufCv0nkum7oo2FJydWDF1fohdwBY=" 
-# أضف هذا في نهاية ملف app.yaml
+name: laravel4  # تأكد أن هذا هو الاسم الصحيح لتطبيقك
+package: .
+
+# 1. تفعيل قاعدة البيانات
+capabilities:
+  database:
+    engine: mysql
+
+# 2. تحديد المنطقة الجغرافية
+locality:
+  regions:
+    - fr-roub1 
+
+# 3. متغيرات البيئة (Environment Variables)
+env:
+  APP_ENV: production
+  APP_DEBUG: "true"  # اجعلها true مؤقتاً لاكتشاف أي أخطاء، ثم false لاحقاً
+  APP_KEY: "base64:STyEX+Yi0BF3oKVufCv0nkum7oo2FJydWDF1fohdwBY=" # ضع مفتاحك الحقيقي هنا
+  DB_CONNECTION: mysql
+  # ملاحظة: Wasmer يحقن DB_NAME و DB_HOST تلقائياً، تأكد من تعديل config/database.php كما شرحنا سابقاً
+
+# 4. المهام التلقائية بعد النشر (Post-Deployment Jobs)
 jobs:
   - name: run-migrations
     trigger: post-deployment
     action:
       execute:
-        command: artisan  # نستخدم الأمر الجديد هنا
+        command: artisan  # هذا الاسم يجب أن يكون معرفاً في ملف wasmer.toml
         cli_args:
           - "migrate"
           - "--force"
-
