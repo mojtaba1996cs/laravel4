@@ -13,14 +13,14 @@ env:
    DB_DATABASE: ${DB_NAME} 
    APP_DEBUG: "true"
    APP_KEY: "base64:STyEX+Yi0BF3oKVufCv0nkum7oo2FJydWDF1fohdwBY=" 
+# أضف هذا في نهاية ملف app.yaml
 jobs:
   - name: run-migrations
     trigger: post-deployment
     action:
       execute:
-        command: run  # يجب أن يطابق اسم الـ command في ملف wasmer.toml
+        command: artisan  # نستخدم الأمر الجديد هنا
         cli_args:
-          - "artisan"
           - "migrate"
           - "--force"
 
