@@ -7,3 +7,11 @@
    runner = "wasi" 
     [command.annotations.wasi] 
     main-args = ["-t", "/app/public", "-S", "localhost:8080"]
+    # أضف هذا في نهاية ملف wasmer.toml
+[[command]]
+name = "artisan"
+module = "php/php:php"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = ["/app/artisan"]
