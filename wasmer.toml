@@ -1,15 +1,23 @@
 [dependencies]
- "php/php" = "=8.3.4" 
- [fs] "/app/" = "."  
- [[command]]
-  name = "run"
-   module = "php/php:php" 
-   runner = "wasi" 
-    [command.annotations.wasi] 
-    main-args = ["-t", "/app/public", "-S", "localhost:8080"]
- [[command]]
-  name = "artisan"
-  module = "php/php:php"
-  runner = "wasi"
-  [command.annotations.wasi]
-  main-args = ["/app/artisan"]
+"php/php" = "=8.3.4"
+
+[fs]
+"/app/" = "."
+
+# أمر تشغيل الموقع (الخادم)
+[[command]]
+name = "run"
+module = "php/php:php"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = ["-t", "/app/public", "-S", "localhost:8080"]
+
+# أمر تشغيل Artisan (ضروري للمهاجرة)
+[[command]]
+name = "artisan"
+module = "php/php:php"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = ["/app/artisan"]
